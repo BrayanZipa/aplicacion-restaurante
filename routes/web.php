@@ -23,3 +23,8 @@ Auth::routes([
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/pedidos', [App\Http\Controllers\pedidosController::class, 'create'])->name('pedidos');
+Route::get('/recetas', [App\Http\Controllers\recetasController::class, 'create'])->name('recetas');
+Route::get('/inventario', [App\Http\Controllers\inventarioController::class, 'create'])->name('inventario');
+Route::get('/proveedores', [App\Http\Controllers\proveedoresController::class, 'create'])->name('proveedores');
