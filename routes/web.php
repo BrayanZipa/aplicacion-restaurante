@@ -26,5 +26,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/pedidos', [App\Http\Controllers\pedidosController::class, 'create'])->name('pedidos');
 Route::get('/recetas', [App\Http\Controllers\recetasController::class, 'create'])->name('recetas');
-Route::get('/inventario', [App\Http\Controllers\inventarioController::class, 'create'])->name('inventario');
 Route::get('/proveedores', [App\Http\Controllers\proveedoresController::class, 'create'])->name('proveedores');
+
+Route::get('/productos', [App\Http\Controllers\productosController::class, 'index'])->name('productos');
+Route::post('/productos/crear', [App\Http\Controllers\productosController::class, 'store'])->name('crearProductos');

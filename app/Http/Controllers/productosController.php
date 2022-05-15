@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
-class inventarioController extends Controller
+class productosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,12 @@ class inventarioController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $productos = Producto::all();
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
+        }
+        return view('pages.productos', compact('productos'));
     }
 
     /**
@@ -23,7 +29,7 @@ class inventarioController extends Controller
      */
     public function create()
     {
-        return view('pages.inventario');
+        // return view('pages.productos');
     }
 
     /**
@@ -34,7 +40,10 @@ class inventarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nuevoProducto = $request->all();
+        $nuevoProducto['usuario'] = auth()->user()->idUsuarios;
+        Producto::create($nuevoProducto);
+        return redirect()->action([productosController::class, 'index']);
     }
 
     /**
@@ -45,7 +54,8 @@ class inventarioController extends Controller
      */
     public function show($id)
     {
-        //
+        $producto = Producto::find($id);
+        return view('pages.mostrarProducto', compact('producto')); 
     }
 
     /**
@@ -56,7 +66,8 @@ class inventarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $producto = Producto::find($id);
+        return view('pages.editarProducto', compact('producto')); 
     }
 
     /**
@@ -68,7 +79,10 @@ class inventarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $producto = $request->all();
+        // $visitante = Visitante::find($id)->fill($request->all())->save();
+        Producto::findOrFail($id)->update($producto);
+        return redirect()->action([productosController::class, 'index']);
     }
 
     /**
@@ -79,6 +93,8 @@ class inventarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $producto = Producto::find($id);
+        $producto->delete();
+        return redirect()->action([productosController::class, 'index']);
     }
 }

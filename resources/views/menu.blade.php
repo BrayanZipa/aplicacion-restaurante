@@ -39,7 +39,7 @@
                         <a class="nav-link {{ Route::is('recetas') ? 'active' : '' }}" href="{{ route('recetas') }}">Recetas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::is('inventario') ? 'active' : '' }}" href="{{ route('inventario') }}">Invetario</a>
+                        <a class="nav-link {{ Route::is('productos') ? 'active' : '' }}" href="{{ route('productos') }}">Productos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('proveedores') ? 'active' : '' }}" href="{{ route('proveedores') }}">Proveedores</a>
