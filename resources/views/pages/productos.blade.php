@@ -1,13 +1,14 @@
 @extends('menu')
 
 @section('contenido')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="text-center">
-                    <h1>Productos</h1>
-                </div><br>
-                <div class="card">
+    <div class="container-fluid">
+        <div class="text-center">
+            <h1>Productos</h1>
+        </div><br>
+
+        <div class="row">
+            <div class="col-3">
+                <div class="card text-white bg-dark" style="max-width: 23rem;">
                     <div class="card-header text-center">
                         <h4>Ingresar nuevo producto</h4>
                     </div>
@@ -42,14 +43,51 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col">
-                @foreach($productos as $producto)
-                    {{ $producto->nombre }}
-                @endforeach
+            <div class="col-9">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Código</th>
+                                        <th scope="col">Costo</th>
+                                        <th scope="col">Unidad</th>
+                                        <th scope="col">Proveedor</th>
+                                        <th scope="col">Usuario que lo crea</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        @foreach($productos as $producto)
+                                        <tr> 
+                                            <th scope="row">{{ $producto->idProductos }}</th>
+                                            <td>{{ $producto->nombre }}</td>
+                                            <td>{{ $producto->codigo }}</td>
+                                            <td>{{ $producto->costo }}</td>
+                                            <td>{{ $producto->unidad }}</td>
+                                            <td>{{ $producto->proveedor }}</td>
+                                            <td>{{ $producto->name }}</td>
+                                            <td class="text-center">
+                                                <form method="POST" action="{{  route('eliminarProducto', ['id' => $producto->idProductos]) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a class="btn btn-primary" href="{{ route('mostrarProducto', ['id' => $producto->idProductos]) }}">Editar</a>
+                                                    <button type="submit" class="btn btn-danger" >Eliminar</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
 @endsection

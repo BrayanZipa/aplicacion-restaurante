@@ -30,3 +30,6 @@ Route::get('/proveedores', [App\Http\Controllers\proveedoresController::class, '
 
 Route::get('/productos', [App\Http\Controllers\productosController::class, 'index'])->name('productos');
 Route::post('/productos/crear', [App\Http\Controllers\productosController::class, 'store'])->name('crearProductos');
+Route::get('/productos/mostrar/{id}', [App\Http\Controllers\productosController::class, 'show'])->name('mostrarProducto');
+Route::put('/productos/actualizar/{id}', [App\Http\Controllers\productosController::class, 'update'])->name('actualizarProducto');
+Route::delete('/productos/eliminar/{id}', [App\Http\Controllers\productosController::class, 'destroy'])->name('eliminarProducto');

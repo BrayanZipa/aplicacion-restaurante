@@ -15,7 +15,7 @@ class productosController extends Controller
     public function index()
     {
         try {
-            $productos = Producto::all();
+            $productos = Producto::select('productos.*', 'usuarios.name')->leftjoin('usuarios', 'productos.usuario', '=', 'usuarios.idUsuarios')->get();
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Error al traer la información de la base de datos'], 500);
         }
@@ -55,7 +55,7 @@ class productosController extends Controller
     public function show($id)
     {
         $producto = Producto::find($id);
-        return view('pages.mostrarProducto', compact('producto')); 
+        return view('pages.editarProducto', compact('producto')); 
     }
 
     /**
@@ -66,8 +66,8 @@ class productosController extends Controller
      */
     public function edit($id)
     {
-        $producto = Producto::find($id);
-        return view('pages.editarProducto', compact('producto')); 
+        // $producto = Producto::find($id);
+        // return view('pages.editarProducto', compact('producto')); 
     }
 
     /**

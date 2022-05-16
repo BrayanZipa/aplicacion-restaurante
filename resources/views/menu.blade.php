@@ -66,8 +66,10 @@
             </div>
         </div>
     </nav><br>
-
-    @yield('contenido')
+    
+    <div class="container-fluid">
+        @yield('contenido')
+    </div>
     
 </body>
 
